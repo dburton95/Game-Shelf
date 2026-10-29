@@ -1,0 +1,4 @@
+[
+    {"title": "Bloodborne", "command": ["/home/dorian/AppImages/Bloodborne-bbport-x86_64.AppImage"]},
+    {"title": "Hollow Knight Silksong", "command": ["steam", "steam://rungameid/1030300"]}
+]
