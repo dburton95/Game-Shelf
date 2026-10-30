@@ -1,4 +1,22 @@
 [
-    {"title": "Bloodborne", "command": ["/home/dorian/AppImages/Bloodborne-bbport-x86_64.AppImage"]},
-    {"title": "Hollow Knight Silksong", "command": ["steam", "steam://rungameid/1030300"]}
+    {
+        "title": "Bloodborne",
+        "command": [
+            "/home/dorian/AppImages/Bloodborne-bbport-x86_64.AppImage"
+        ]
+    },
+    {
+        "title": "Final Fantasy XIV",
+        "command": [
+            "/usr/bin/flatpak",
+            "run", 
+            "--branch=stable",
+            "--arch=x86_64",
+            "--command=xivlauncher",
+            "dev.goats.xivlauncher"
+        ],
+        "source": "manual",
+        "cover": null,
+        "hidden": false
+    }
 ]
