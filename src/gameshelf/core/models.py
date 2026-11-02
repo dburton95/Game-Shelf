@@ -14,3 +14,7 @@ class Game:
             "cover": self.cover,
             "hidden": self.hidden,
         }
+
+    @classmethod
+    def from_dict(cls, data):
+        return cls(data["title"], data["command"], source=data["source"], cover=data["cover"], hidden=data["hidden"])

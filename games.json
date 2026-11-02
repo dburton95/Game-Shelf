@@ -3,19 +3,362 @@
         "title": "Bloodborne",
         "command": [
             "/home/dorian/AppImages/Bloodborne-bbport-x86_64.AppImage"
-        ]
+        ],
+        "source": "manual",
+        "cover": null,
+        "hidden": false
     },
     {
         "title": "Final Fantasy XIV",
         "command": [
             "/usr/bin/flatpak",
-            "run", 
+            "run",
             "--branch=stable",
             "--arch=x86_64",
             "--command=xivlauncher",
             "dev.goats.xivlauncher"
         ],
         "source": "manual",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Steamworks Common Redistributables",
+        "command": [
+            "steam",
+            "steam://rungameid/228980"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Steam Linux Runtime 2.0 (soldier)",
+        "command": [
+            "steam",
+            "steam://rungameid/1391110"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Steam Linux Runtime 1.0 (scout)",
+        "command": [
+            "steam",
+            "steam://rungameid/1070560"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Steam Linux Runtime 3.0 (sniper)",
+        "command": [
+            "steam",
+            "steam://rungameid/1628350"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Proton Experimental",
+        "command": [
+            "steam",
+            "steam://rungameid/1493710"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Steam Linux Runtime 4.0",
+        "command": [
+            "steam",
+            "steam://rungameid/4183110"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Project Zomboid",
+        "command": [
+            "steam",
+            "steam://rungameid/108600"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Slay the Spire 2",
+        "command": [
+            "steam",
+            "steam://rungameid/2868840"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "ARC Raiders",
+        "command": [
+            "steam",
+            "steam://rungameid/1808500"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Digimon Story Time Stranger",
+        "command": [
+            "steam",
+            "steam://rungameid/1984270"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Proton 10.0",
+        "command": [
+            "steam",
+            "steam://rungameid/3658110"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Never Grave",
+        "command": [
+            "steam",
+            "steam://rungameid/2395770"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "V Rising",
+        "command": [
+            "steam",
+            "steam://rungameid/1604030"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Cassette Beasts",
+        "command": [
+            "steam",
+            "steam://rungameid/1321440"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Hades II",
+        "command": [
+            "steam",
+            "steam://rungameid/1145350"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Hollow Knight: Silksong",
+        "command": [
+            "steam",
+            "steam://rungameid/1030300"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Hatsune Miku: Project DIVA Mega Mix+",
+        "command": [
+            "steam",
+            "steam://rungameid/1761390"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "R.E.P.O.",
+        "command": [
+            "steam",
+            "steam://rungameid/3241660"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Terraria",
+        "command": [
+            "steam",
+            "steam://rungameid/105600"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Shin Megami Tensei V: Vengeance",
+        "command": [
+            "steam",
+            "steam://rungameid/1875830"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Fate/stay night REMASTERED",
+        "command": [
+            "steam",
+            "steam://rungameid/2396980"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Proton 9.0",
+        "command": [
+            "steam",
+            "steam://rungameid/2805730"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "The Witcher 3: Wild Hunt \u2014 Remastered",
+        "command": [
+            "steam",
+            "steam://rungameid/292030"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Proton EasyAntiCheat Runtime",
+        "command": [
+            "steam",
+            "steam://rungameid/1826330"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Stardew Valley",
+        "command": [
+            "steam",
+            "steam://rungameid/413150"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "SpiritVale",
+        "command": [
+            "steam",
+            "steam://rungameid/3767850"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "AION 2",
+        "command": [
+            "steam",
+            "steam://rungameid/3393110"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Palworld",
+        "command": [
+            "steam",
+            "steam://rungameid/1623730"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "VA-11 Hall-A: Cyberpunk Bartender Action",
+        "command": [
+            "steam",
+            "steam://rungameid/447530"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "100% Orange Juice",
+        "command": [
+            "steam",
+            "steam://rungameid/282800"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Tabletop Simulator",
+        "command": [
+            "steam",
+            "steam://rungameid/286160"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "WitchSpring R - The Story of Pieberry",
+        "command": [
+            "steam",
+            "steam://rungameid/1958220"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "NEEDY GIRL OVERDOSE",
+        "command": [
+            "steam",
+            "steam://rungameid/1451940"
+        ],
+        "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "title": "Spirit City: Lofi Sessions",
+        "command": [
+            "steam",
+            "steam://rungameid/2113850"
+        ],
+        "source": "steam",
         "cover": null,
         "hidden": false
     }
