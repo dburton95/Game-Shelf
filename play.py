@@ -5,7 +5,7 @@ from src.gameshelf.core.models import Game
 with open("games.json", "r") as gamesFile:
     gamesList = json.load(gamesFile)
 
-gamesList = [Game(title=entry["title"], command=entry["command"]) for entry in gamesList]
+gamesList = [Game(id=entry["id"], title=entry["title"], command=entry["command"]) for entry in gamesList]
 
 for number, game in enumerate(gamesList, start=1):
     print(number," ",game.title)

@@ -2,6 +2,7 @@ from pathlib import Path
 import re
 from gameshelf.core.models import Game
 import json
+from gameshelf.core.library import LibraryManager
 
 vdfFiles = {
     "native": Path.home() / ".local/share/Steam/steamapps/libraryfolders.vdf",
@@ -48,18 +49,26 @@ for library_path in library_paths:
     steamapps_dir = Path(library_path) / "steamapps"
     acf_files.extend(steamapps_dir.glob("appmanifest_*.acf"))
 
-with open("games.json", "r") as gamesFile:
-    gamesList = json.load(gamesFile)
-
+newGames = []
 for manifest in acf_files:
     with open(manifest, "r") as f:
         rawData = f.read()
     manifestData = parse_file(rawData)
-    title = manifestData["AppState"]["name"]
     appId = manifestData["AppState"]["appid"]
+    id = f"steam:{appId}"
+    title = manifestData["AppState"]["name"]
     command = ["steam", f"steam://rungameid/{appId}"]
-    game = Game(title, list(command), source="steam")
-    gamesList.append(game.to_dict())
+    game = Game(id, title, list(command), source="steam")
+    newGames.append(game)
+
+manager = LibraryManager()
+existingGames = manager.load("games.json")
+existingById = manager.list_by_id(existingGames)
+merged = manager.merge(existingById, newGames)
+
+jsonOutput = []
+for game in merged.values():
+    jsonOutput.append(game.to_dict())
 
 with open("games.json", "w") as gamesFile:
-    json.dump(gamesList, gamesFile, indent=4)
+    json.dump(jsonOutput, gamesFile, indent=4)

@@ -1,5 +1,6 @@
 class Game:
-    def __init__(self, title, command, source="manual", cover=None, hidden=False):
+    def __init__(self, id, title, command, source="manual", cover=None, hidden=False):
+        self.id = id
         self.title = title
         self.command = command
         self.source = source
@@ -8,6 +9,7 @@ class Game:
 
     def to_dict(self):
         return {
+            "id": self.id,
             "title": self.title,
             "command": self.command,
             "source": self.source,
@@ -17,4 +19,4 @@ class Game:
 
     @classmethod
     def from_dict(cls, data):
-        return cls(data["title"], data["command"], source=data["source"], cover=data["cover"], hidden=data["hidden"])
+        return cls(data["id"], data["title"], data["command"], source=data["source"], cover=data["cover"], hidden=data["hidden"])

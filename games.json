@@ -1,15 +1,118 @@
 [
     {
-        "title": "Bloodborne",
+        "id": "desktop:shadps4",
+        "title": "shadPS4",
         "command": [
-            "/home/dorian/AppImages/Bloodborne-bbport-x86_64.AppImage"
+            "env",
+            "DESKTOPINTEGRATION=1",
+            "/home/dorian/AppImages/shadps4.appimage"
         ],
-        "source": "manual",
+        "source": "desktop",
         "cover": null,
         "hidden": false
     },
     {
-        "title": "Final Fantasy XIV",
+        "id": "desktop:warp",
+        "title": "Warp",
+        "command": [
+            "/usr/bin/faugus-launcher",
+            "--game",
+            "warp"
+        ],
+        "source": "desktop",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "id": "desktop:bgb",
+        "title": "BGB",
+        "command": [
+            "wine",
+            "/home/dorian/Games/BGB/bgb.exe"
+        ],
+        "source": "desktop",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "id": "desktop:rpcs3",
+        "title": "RPCS3",
+        "command": [
+            "env",
+            "DESKTOPINTEGRATION=1",
+            "/home/dorian/AppImages/rpcs3.appimage",
+            "%f"
+        ],
+        "source": "desktop",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "id": "desktop:bloodborne",
+        "title": "Bloodborne",
+        "command": [
+            "/home/dorian/AppImages/Bloodborne-bbport-x86_64.AppImage"
+        ],
+        "source": "desktop",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "id": "desktop:org.dosbox-staging.dosbox-staging",
+        "title": "DOSBox Staging",
+        "command": [
+            "dosbox"
+        ],
+        "source": "desktop",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "id": "desktop:love",
+        "title": "L\u00d6VE",
+        "command": [
+            "/usr/bin/love",
+            "%f"
+        ],
+        "source": "desktop",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "id": "desktop:net.lutris.Lutris",
+        "title": "Lutris",
+        "command": [
+            "lutris",
+            "%U"
+        ],
+        "source": "desktop",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "id": "desktop:wine-winemine",
+        "title": "WineMine",
+        "command": [
+            "winemine"
+        ],
+        "source": "desktop",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "id": "desktop:com.usebottles.bottles",
+        "title": "Bottles",
+        "command": [
+            "bottles",
+            "%u"
+        ],
+        "source": "desktop",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "id": "desktop:dev.goats.xivlauncher",
+        "title": "XIVLauncher",
         "command": [
             "/usr/bin/flatpak",
             "run",
@@ -18,11 +121,97 @@
             "--command=xivlauncher",
             "dev.goats.xivlauncher"
         ],
-        "source": "manual",
+        "source": "desktop",
         "cover": null,
         "hidden": false
     },
     {
+        "id": "desktop:com.pokemmo.PokeMMO.Settings",
+        "title": "PokeMMO Settings",
+        "command": [
+            "/usr/bin/flatpak",
+            "run",
+            "--branch=stable",
+            "--arch=x86_64",
+            "--command=pokemmo.sh",
+            "com.pokemmo.PokeMMO",
+            "--force-ui"
+        ],
+        "source": "desktop",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "id": "desktop:com.pokemmo.PokeMMO",
+        "title": "PokeMMO",
+        "command": [
+            "/usr/bin/flatpak",
+            "run",
+            "--branch=stable",
+            "--arch=x86_64",
+            "--command=pokemmo.sh",
+            "com.pokemmo.PokeMMO",
+            "--launch"
+        ],
+        "source": "desktop",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "id": "desktop:com.vysp3r.ProtonPlus",
+        "title": "ProtonPlus",
+        "command": [
+            "/usr/bin/flatpak",
+            "run",
+            "--branch=stable",
+            "--arch=x86_64",
+            "--command=protonplus",
+            "com.vysp3r.ProtonPlus"
+        ],
+        "source": "desktop",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "id": "desktop:org.prismlauncher.PrismLauncher",
+        "title": "Prism Launcher",
+        "command": [
+            "/usr/bin/flatpak",
+            "run",
+            "--branch=stable",
+            "--arch=x86_64",
+            "--command=prismlauncher",
+            "--file-forwarding",
+            "org.prismlauncher.PrismLauncher",
+            "@@u",
+            "%U",
+            "@@"
+        ],
+        "source": "desktop",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "id": "desktop:com.heroicgameslauncher.hgl",
+        "title": "Heroic Games Launcher",
+        "command": [
+            "/usr/bin/flatpak",
+            "run",
+            "--branch=stable",
+            "--arch=x86_64",
+            "--command=heroic-run",
+            "--file-forwarding",
+            "com.heroicgameslauncher.hgl",
+            "@@u",
+            "%u",
+            "@@"
+        ],
+        "source": "desktop",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "id": "steam:228980",
         "title": "Steamworks Common Redistributables",
         "command": [
             "steam",
@@ -33,6 +222,7 @@
         "hidden": false
     },
     {
+        "id": "steam:1391110",
         "title": "Steam Linux Runtime 2.0 (soldier)",
         "command": [
             "steam",
@@ -43,6 +233,7 @@
         "hidden": false
     },
     {
+        "id": "steam:1070560",
         "title": "Steam Linux Runtime 1.0 (scout)",
         "command": [
             "steam",
@@ -53,6 +244,7 @@
         "hidden": false
     },
     {
+        "id": "steam:1628350",
         "title": "Steam Linux Runtime 3.0 (sniper)",
         "command": [
             "steam",
@@ -63,6 +255,7 @@
         "hidden": false
     },
     {
+        "id": "steam:1493710",
         "title": "Proton Experimental",
         "command": [
             "steam",
@@ -73,6 +266,7 @@
         "hidden": false
     },
     {
+        "id": "steam:4183110",
         "title": "Steam Linux Runtime 4.0",
         "command": [
             "steam",
@@ -83,6 +277,7 @@
         "hidden": false
     },
     {
+        "id": "steam:108600",
         "title": "Project Zomboid",
         "command": [
             "steam",
@@ -93,6 +288,7 @@
         "hidden": false
     },
     {
+        "id": "steam:2868840",
         "title": "Slay the Spire 2",
         "command": [
             "steam",
@@ -103,6 +299,7 @@
         "hidden": false
     },
     {
+        "id": "steam:1808500",
         "title": "ARC Raiders",
         "command": [
             "steam",
@@ -113,6 +310,7 @@
         "hidden": false
     },
     {
+        "id": "steam:1984270",
         "title": "Digimon Story Time Stranger",
         "command": [
             "steam",
@@ -123,6 +321,7 @@
         "hidden": false
     },
     {
+        "id": "steam:3658110",
         "title": "Proton 10.0",
         "command": [
             "steam",
@@ -133,6 +332,7 @@
         "hidden": false
     },
     {
+        "id": "steam:2395770",
         "title": "Never Grave",
         "command": [
             "steam",
@@ -143,6 +343,7 @@
         "hidden": false
     },
     {
+        "id": "steam:1604030",
         "title": "V Rising",
         "command": [
             "steam",
@@ -153,6 +354,7 @@
         "hidden": false
     },
     {
+        "id": "steam:1321440",
         "title": "Cassette Beasts",
         "command": [
             "steam",
@@ -163,6 +365,7 @@
         "hidden": false
     },
     {
+        "id": "steam:1145350",
         "title": "Hades II",
         "command": [
             "steam",
@@ -173,6 +376,7 @@
         "hidden": false
     },
     {
+        "id": "steam:1030300",
         "title": "Hollow Knight: Silksong",
         "command": [
             "steam",
@@ -183,6 +387,7 @@
         "hidden": false
     },
     {
+        "id": "steam:1761390",
         "title": "Hatsune Miku: Project DIVA Mega Mix+",
         "command": [
             "steam",
@@ -193,6 +398,7 @@
         "hidden": false
     },
     {
+        "id": "steam:3241660",
         "title": "R.E.P.O.",
         "command": [
             "steam",
@@ -203,6 +409,7 @@
         "hidden": false
     },
     {
+        "id": "steam:105600",
         "title": "Terraria",
         "command": [
             "steam",
@@ -213,6 +420,7 @@
         "hidden": false
     },
     {
+        "id": "steam:1875830",
         "title": "Shin Megami Tensei V: Vengeance",
         "command": [
             "steam",
@@ -223,6 +431,7 @@
         "hidden": false
     },
     {
+        "id": "steam:2396980",
         "title": "Fate/stay night REMASTERED",
         "command": [
             "steam",
@@ -233,6 +442,7 @@
         "hidden": false
     },
     {
+        "id": "steam:2805730",
         "title": "Proton 9.0",
         "command": [
             "steam",
@@ -243,6 +453,7 @@
         "hidden": false
     },
     {
+        "id": "steam:292030",
         "title": "The Witcher 3: Wild Hunt \u2014 Remastered",
         "command": [
             "steam",
@@ -253,6 +464,7 @@
         "hidden": false
     },
     {
+        "id": "steam:1826330",
         "title": "Proton EasyAntiCheat Runtime",
         "command": [
             "steam",
@@ -263,6 +475,7 @@
         "hidden": false
     },
     {
+        "id": "steam:413150",
         "title": "Stardew Valley",
         "command": [
             "steam",
@@ -273,6 +486,7 @@
         "hidden": false
     },
     {
+        "id": "steam:3767850",
         "title": "SpiritVale",
         "command": [
             "steam",
@@ -283,6 +497,7 @@
         "hidden": false
     },
     {
+        "id": "steam:3393110",
         "title": "AION 2",
         "command": [
             "steam",
@@ -293,6 +508,7 @@
         "hidden": false
     },
     {
+        "id": "steam:1623730",
         "title": "Palworld",
         "command": [
             "steam",
@@ -303,6 +519,7 @@
         "hidden": false
     },
     {
+        "id": "steam:447530",
         "title": "VA-11 Hall-A: Cyberpunk Bartender Action",
         "command": [
             "steam",
@@ -313,6 +530,7 @@
         "hidden": false
     },
     {
+        "id": "steam:282800",
         "title": "100% Orange Juice",
         "command": [
             "steam",
@@ -323,6 +541,7 @@
         "hidden": false
     },
     {
+        "id": "steam:286160",
         "title": "Tabletop Simulator",
         "command": [
             "steam",
@@ -333,6 +552,7 @@
         "hidden": false
     },
     {
+        "id": "steam:1958220",
         "title": "WitchSpring R - The Story of Pieberry",
         "command": [
             "steam",
@@ -343,6 +563,7 @@
         "hidden": false
     },
     {
+        "id": "steam:1451940",
         "title": "NEEDY GIRL OVERDOSE",
         "command": [
             "steam",
@@ -353,6 +574,7 @@
         "hidden": false
     },
     {
+        "id": "steam:2113850",
         "title": "Spirit City: Lofi Sessions",
         "command": [
             "steam",
