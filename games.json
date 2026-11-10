@@ -539,7 +539,7 @@
         "hidden": false
     },
     {
-        "id": "epic-gog:e8bbb84be35640cda646233152ff3428",
+        "id": "heroic-epic:e8bbb84be35640cda646233152ff3428",
         "title": "Brotato",
         "command": [
             "xdg-open",
@@ -550,13 +550,13 @@
         "hidden": false
     },
     {
-        "id": "amazon-gog:amzn1.adg.product.9274ae27-f99c-4594-a917-9cc01e3f65ad",
+        "id": "heroic-amazon:amzn1.adg.product.9274ae27-f99c-4594-a917-9cc01e3f65ad",
         "title": "Golfie",
         "command": [
             "xdg-open",
             "heroic://launch?appName=amzn1.adg.product.9274ae27-f99c-4594-a917-9cc01e3f65ad&runner=nile&gui=false"
         ],
-        "source": "amazon-gog",
+        "source": "heroic-amazon",
         "cover": null,
         "hidden": false
     }

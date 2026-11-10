@@ -47,7 +47,7 @@ for label, filePath in heroicPaths.items():
                     epicId = game["app_name"]
     
                     title = game["title"]
-                    id = f"epic-gog:{epicId}"
+                    id = f"heroic-epic:{epicId}"
                     command = ["xdg-open", f"heroic://launch?appName={epicId}&runner=legendary&gui=false"]
                     game = Game(id, title, list(command), source="heroic-epic")
                     newGames.append(game)
@@ -69,11 +69,11 @@ for label, filePath in heroicPaths.items():
                     amazonId = installedGame["id"]
 
                     title = titlesById[installedGame["id"]]
-                    id = f"amazon-gog:{amazonId}"
+                    id = f"heroic-amazon:{amazonId}"
                     command = ["xdg-open", f"heroic://launch?appName={amazonId}&runner=nile&gui=false"]
-                    game = Game(id, title, list(command), source="amazon-gog")
+                    game = Game(id, title, list(command), source="heroic-amazon")
                     newGames.append(game)
-            merged = manager.merge(existingById, newGames, "heroic-epic")
+            merged = manager.merge(existingById, newGames, "heroic-amazon")
         except FileNotFoundError:
             print("No Amazon games found.")
 
