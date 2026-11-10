@@ -2,6 +2,7 @@ import subprocess
 import json
 from gameshelf.core.models import Game
 from gameshelf.core.library import LibraryManager
+from gameshelf.core.host import HostRunner
 
 lutrisCommands = {
     "native": ["lutris", "--list-games", "--installed", "--json"],
@@ -9,21 +10,14 @@ lutrisCommands = {
 }
 
 gamesList = []
+runner = HostRunner()
 for installType in lutrisCommands:
     try:
-        result = subprocess.run(
-            lutrisCommands[installType],
-            capture_output = True,
-            text = True
-            )
-        if result.returncode == 0:
-            games = json.loads(result.stdout)
-            for game in games:
-                gamesList.append(game)
-        else:      
-            continue
-    except FileNotFoundError:
-        print(installType, "not found")
+        result = runner.output(lutrisCommands[installType])
+        games = json.loads(result)
+        for game in games:
+            gamesList.append(game)
+    except (FileNotFoundError, subprocess.CalledProcessError):
         continue
 
 newGames = []

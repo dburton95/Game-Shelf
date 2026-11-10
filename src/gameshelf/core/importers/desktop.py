@@ -5,6 +5,7 @@ from gi.repository import GLib
 import json
 from gameshelf.core.models import Game
 from gameshelf.core.library import LibraryManager
+import shlex
 
 desktopPaths = [
     Path.home() / ".local/share/applications",
@@ -37,7 +38,7 @@ for game in gamesList:
     id = f"desktop:{game.stem}"
     keyfile.load_from_file(str(game), GLib.KeyFileFlags.NONE)
     title = keyfile.get_string("Desktop Entry", "Name")
-    command = [str(game)]
+    command = shlex.split(keyfile.get_string("Desktop Entry", "Exec"))
     game = Game(id, title, list(command), source="desktop")
     newGames.append(game)
    

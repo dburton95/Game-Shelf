@@ -1,11 +1,13 @@
 import json
 import subprocess
 from src.gameshelf.core.models import Game
+from src.gameshelf.core.host import HostRunner
+
 
 with open("games.json", "r") as gamesFile:
     gamesList = json.load(gamesFile)
 
-gamesList = [Game(id=entry["id"], title=entry["title"], command=entry["command"]) for entry in gamesList]
+gamesList = [Game.from_dict(entry) for entry in gamesList]
 
 for number, game in enumerate(gamesList, start=1):
     print(number," ",game.title)
@@ -16,9 +18,13 @@ while True:
     except ValueError:
         print("Please enter a number.")
         continue
-    if 0 <= gameChoice < len(gamesList):
+    if not 0 <= gameChoice < len(gamesList):
+        print("That number isn't on the list.")
+        continue
+    else:
         break
-    print("That number isn't on the list.")
 
 
-subprocess.Popen(gamesList[gameChoice].command, start_new_session=True)
+
+runner = HostRunner()
+runner.run(gamesList[gameChoice].command)
