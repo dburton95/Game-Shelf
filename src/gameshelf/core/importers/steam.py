@@ -57,14 +57,14 @@ for manifest in acf_files:
     appId = manifestData["AppState"]["appid"]
     id = f"steam:{appId}"
     title = manifestData["AppState"]["name"]
-    command = ["steam", f"steam://rungameid/{appId}"]
+    command = ["xdg-open", f"steam://rungameid/{appId}"]
     game = Game(id, title, list(command), source="steam")
     newGames.append(game)
 
 manager = LibraryManager()
 existingGames = manager.load("games.json")
 existingById = manager.list_by_id(existingGames)
-merged = manager.merge(existingById, newGames)
+merged = manager.merge(existingById, newGames, "steam")
 
 jsonOutput = []
 for game in merged.values():

@@ -19,7 +19,11 @@ class LibraryManager:
             gamesById[game.id] = game
         return gamesById
 
-    def merge(self, existingGames, newGames):
+    def merge(self, existingGames, newGames, source):
+        newGameIds = {g.id for g in newGames}
+        for id, existingGame in list(existingGames.items()):
+            if existingGame.source == source and existingGame.id not in newGameIds:
+                    del existingGames[id]
         for newGame in newGames:
             if newGame.id in existingGames:
                 existingGames[newGame.id].title = newGame.title

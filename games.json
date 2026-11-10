@@ -3,9 +3,7 @@
         "id": "desktop:shadps4",
         "title": "shadPS4",
         "command": [
-            "env",
-            "DESKTOPINTEGRATION=1",
-            "/home/dorian/AppImages/shadps4.appimage"
+            "/home/dorian/.local/share/applications/shadps4.desktop"
         ],
         "source": "desktop",
         "cover": null,
@@ -15,20 +13,7 @@
         "id": "desktop:warp",
         "title": "Warp",
         "command": [
-            "/usr/bin/faugus-launcher",
-            "--game",
-            "warp"
-        ],
-        "source": "desktop",
-        "cover": null,
-        "hidden": false
-    },
-    {
-        "id": "desktop:bgb",
-        "title": "BGB",
-        "command": [
-            "wine",
-            "/home/dorian/Games/BGB/bgb.exe"
+            "/home/dorian/.local/share/applications/warp.desktop"
         ],
         "source": "desktop",
         "cover": null,
@@ -38,20 +23,7 @@
         "id": "desktop:rpcs3",
         "title": "RPCS3",
         "command": [
-            "env",
-            "DESKTOPINTEGRATION=1",
-            "/home/dorian/AppImages/rpcs3.appimage",
-            "%f"
-        ],
-        "source": "desktop",
-        "cover": null,
-        "hidden": false
-    },
-    {
-        "id": "desktop:bloodborne",
-        "title": "Bloodborne",
-        "command": [
-            "/home/dorian/AppImages/Bloodborne-bbport-x86_64.AppImage"
+            "/home/dorian/.local/share/applications/rpcs3.desktop"
         ],
         "source": "desktop",
         "cover": null,
@@ -61,7 +33,7 @@
         "id": "desktop:org.dosbox-staging.dosbox-staging",
         "title": "DOSBox Staging",
         "command": [
-            "dosbox"
+            "/usr/share/applications/org.dosbox-staging.dosbox-staging.desktop"
         ],
         "source": "desktop",
         "cover": null,
@@ -71,19 +43,7 @@
         "id": "desktop:love",
         "title": "L\u00d6VE",
         "command": [
-            "/usr/bin/love",
-            "%f"
-        ],
-        "source": "desktop",
-        "cover": null,
-        "hidden": false
-    },
-    {
-        "id": "desktop:net.lutris.Lutris",
-        "title": "Lutris",
-        "command": [
-            "lutris",
-            "%U"
+            "/usr/share/applications/love.desktop"
         ],
         "source": "desktop",
         "cover": null,
@@ -93,18 +53,7 @@
         "id": "desktop:wine-winemine",
         "title": "WineMine",
         "command": [
-            "winemine"
-        ],
-        "source": "desktop",
-        "cover": null,
-        "hidden": false
-    },
-    {
-        "id": "desktop:com.usebottles.bottles",
-        "title": "Bottles",
-        "command": [
-            "bottles",
-            "%u"
+            "/usr/share/applications/wine-winemine.desktop"
         ],
         "source": "desktop",
         "cover": null,
@@ -114,12 +63,7 @@
         "id": "desktop:dev.goats.xivlauncher",
         "title": "XIVLauncher",
         "command": [
-            "/usr/bin/flatpak",
-            "run",
-            "--branch=stable",
-            "--arch=x86_64",
-            "--command=xivlauncher",
-            "dev.goats.xivlauncher"
+            "/var/lib/flatpak/exports/share/applications/dev.goats.xivlauncher.desktop"
         ],
         "source": "desktop",
         "cover": null,
@@ -129,13 +73,7 @@
         "id": "desktop:com.pokemmo.PokeMMO.Settings",
         "title": "PokeMMO Settings",
         "command": [
-            "/usr/bin/flatpak",
-            "run",
-            "--branch=stable",
-            "--arch=x86_64",
-            "--command=pokemmo.sh",
-            "com.pokemmo.PokeMMO",
-            "--force-ui"
+            "/var/lib/flatpak/exports/share/applications/com.pokemmo.PokeMMO.Settings.desktop"
         ],
         "source": "desktop",
         "cover": null,
@@ -145,13 +83,7 @@
         "id": "desktop:com.pokemmo.PokeMMO",
         "title": "PokeMMO",
         "command": [
-            "/usr/bin/flatpak",
-            "run",
-            "--branch=stable",
-            "--arch=x86_64",
-            "--command=pokemmo.sh",
-            "com.pokemmo.PokeMMO",
-            "--launch"
+            "/var/lib/flatpak/exports/share/applications/com.pokemmo.PokeMMO.desktop"
         ],
         "source": "desktop",
         "cover": null,
@@ -161,12 +93,7 @@
         "id": "desktop:com.vysp3r.ProtonPlus",
         "title": "ProtonPlus",
         "command": [
-            "/usr/bin/flatpak",
-            "run",
-            "--branch=stable",
-            "--arch=x86_64",
-            "--command=protonplus",
-            "com.vysp3r.ProtonPlus"
+            "/var/lib/flatpak/exports/share/applications/com.vysp3r.ProtonPlus.desktop"
         ],
         "source": "desktop",
         "cover": null,
@@ -176,35 +103,7 @@
         "id": "desktop:org.prismlauncher.PrismLauncher",
         "title": "Prism Launcher",
         "command": [
-            "/usr/bin/flatpak",
-            "run",
-            "--branch=stable",
-            "--arch=x86_64",
-            "--command=prismlauncher",
-            "--file-forwarding",
-            "org.prismlauncher.PrismLauncher",
-            "@@u",
-            "%U",
-            "@@"
-        ],
-        "source": "desktop",
-        "cover": null,
-        "hidden": false
-    },
-    {
-        "id": "desktop:com.heroicgameslauncher.hgl",
-        "title": "Heroic Games Launcher",
-        "command": [
-            "/usr/bin/flatpak",
-            "run",
-            "--branch=stable",
-            "--arch=x86_64",
-            "--command=heroic-run",
-            "--file-forwarding",
-            "com.heroicgameslauncher.hgl",
-            "@@u",
-            "%u",
-            "@@"
+            "/var/lib/flatpak/exports/share/applications/org.prismlauncher.PrismLauncher.desktop"
         ],
         "source": "desktop",
         "cover": null,
@@ -214,7 +113,7 @@
         "id": "steam:228980",
         "title": "Steamworks Common Redistributables",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/228980"
         ],
         "source": "steam",
@@ -225,7 +124,7 @@
         "id": "steam:1391110",
         "title": "Steam Linux Runtime 2.0 (soldier)",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/1391110"
         ],
         "source": "steam",
@@ -236,7 +135,7 @@
         "id": "steam:1070560",
         "title": "Steam Linux Runtime 1.0 (scout)",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/1070560"
         ],
         "source": "steam",
@@ -247,7 +146,7 @@
         "id": "steam:1628350",
         "title": "Steam Linux Runtime 3.0 (sniper)",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/1628350"
         ],
         "source": "steam",
@@ -258,7 +157,7 @@
         "id": "steam:1493710",
         "title": "Proton Experimental",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/1493710"
         ],
         "source": "steam",
@@ -269,7 +168,7 @@
         "id": "steam:4183110",
         "title": "Steam Linux Runtime 4.0",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/4183110"
         ],
         "source": "steam",
@@ -280,7 +179,7 @@
         "id": "steam:108600",
         "title": "Project Zomboid",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/108600"
         ],
         "source": "steam",
@@ -291,7 +190,7 @@
         "id": "steam:2868840",
         "title": "Slay the Spire 2",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/2868840"
         ],
         "source": "steam",
@@ -302,7 +201,7 @@
         "id": "steam:1808500",
         "title": "ARC Raiders",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/1808500"
         ],
         "source": "steam",
@@ -313,7 +212,7 @@
         "id": "steam:1984270",
         "title": "Digimon Story Time Stranger",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/1984270"
         ],
         "source": "steam",
@@ -324,7 +223,7 @@
         "id": "steam:3658110",
         "title": "Proton 10.0",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/3658110"
         ],
         "source": "steam",
@@ -335,7 +234,7 @@
         "id": "steam:2395770",
         "title": "Never Grave",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/2395770"
         ],
         "source": "steam",
@@ -346,7 +245,7 @@
         "id": "steam:1604030",
         "title": "V Rising",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/1604030"
         ],
         "source": "steam",
@@ -357,7 +256,7 @@
         "id": "steam:1321440",
         "title": "Cassette Beasts",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/1321440"
         ],
         "source": "steam",
@@ -368,7 +267,7 @@
         "id": "steam:1145350",
         "title": "Hades II",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/1145350"
         ],
         "source": "steam",
@@ -379,7 +278,7 @@
         "id": "steam:1030300",
         "title": "Hollow Knight: Silksong",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/1030300"
         ],
         "source": "steam",
@@ -390,7 +289,7 @@
         "id": "steam:1761390",
         "title": "Hatsune Miku: Project DIVA Mega Mix+",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/1761390"
         ],
         "source": "steam",
@@ -401,7 +300,7 @@
         "id": "steam:3241660",
         "title": "R.E.P.O.",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/3241660"
         ],
         "source": "steam",
@@ -412,7 +311,7 @@
         "id": "steam:105600",
         "title": "Terraria",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/105600"
         ],
         "source": "steam",
@@ -423,7 +322,7 @@
         "id": "steam:1875830",
         "title": "Shin Megami Tensei V: Vengeance",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/1875830"
         ],
         "source": "steam",
@@ -434,7 +333,7 @@
         "id": "steam:2396980",
         "title": "Fate/stay night REMASTERED",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/2396980"
         ],
         "source": "steam",
@@ -445,7 +344,7 @@
         "id": "steam:2805730",
         "title": "Proton 9.0",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/2805730"
         ],
         "source": "steam",
@@ -456,7 +355,7 @@
         "id": "steam:292030",
         "title": "The Witcher 3: Wild Hunt \u2014 Remastered",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/292030"
         ],
         "source": "steam",
@@ -467,7 +366,7 @@
         "id": "steam:1826330",
         "title": "Proton EasyAntiCheat Runtime",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/1826330"
         ],
         "source": "steam",
@@ -478,7 +377,7 @@
         "id": "steam:413150",
         "title": "Stardew Valley",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/413150"
         ],
         "source": "steam",
@@ -489,7 +388,7 @@
         "id": "steam:3767850",
         "title": "SpiritVale",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/3767850"
         ],
         "source": "steam",
@@ -500,7 +399,7 @@
         "id": "steam:3393110",
         "title": "AION 2",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/3393110"
         ],
         "source": "steam",
@@ -511,7 +410,7 @@
         "id": "steam:1623730",
         "title": "Palworld",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/1623730"
         ],
         "source": "steam",
@@ -522,7 +421,7 @@
         "id": "steam:447530",
         "title": "VA-11 Hall-A: Cyberpunk Bartender Action",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/447530"
         ],
         "source": "steam",
@@ -533,7 +432,7 @@
         "id": "steam:282800",
         "title": "100% Orange Juice",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/282800"
         ],
         "source": "steam",
@@ -544,7 +443,7 @@
         "id": "steam:286160",
         "title": "Tabletop Simulator",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/286160"
         ],
         "source": "steam",
@@ -555,7 +454,7 @@
         "id": "steam:1958220",
         "title": "WitchSpring R - The Story of Pieberry",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/1958220"
         ],
         "source": "steam",
@@ -566,7 +465,7 @@
         "id": "steam:1451940",
         "title": "NEEDY GIRL OVERDOSE",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/1451940"
         ],
         "source": "steam",
@@ -577,10 +476,87 @@
         "id": "steam:2113850",
         "title": "Spirit City: Lofi Sessions",
         "command": [
-            "steam",
+            "xdg-open",
             "steam://rungameid/2113850"
         ],
         "source": "steam",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "id": "lutris:38",
+        "title": "Final Fantasy XI Online",
+        "command": [
+            "xdg-open",
+            "lutris:rungame/final-fantasy-xi-online"
+        ],
+        "source": "lutris",
+        "cover": "/home/dorian/.local/share/lutris/coverart/final-fantasy-xi-online.jpg",
+        "hidden": false
+    },
+    {
+        "id": "lutris:40",
+        "title": "Pangya",
+        "command": [
+            "xdg-open",
+            "lutris:rungame/pangya"
+        ],
+        "source": "lutris",
+        "cover": "/home/dorian/.local/share/lutris/coverart/pangya.jpg",
+        "hidden": false
+    },
+    {
+        "id": "lutris:41",
+        "title": "Phantasy Star Online: Blue Burst",
+        "command": [
+            "xdg-open",
+            "lutris:rungame/phantasy-star-online-blue-burst"
+        ],
+        "source": "lutris",
+        "cover": "/home/dorian/.local/share/lutris/coverart/phantasy-star-online-blue-burst.jpg",
+        "hidden": false
+    },
+    {
+        "id": "lutris:43",
+        "title": "wRO",
+        "command": [
+            "xdg-open",
+            "lutris:rungame/wro"
+        ],
+        "source": "lutris",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "id": "heroic-gog:1443428641",
+        "title": "HuniePop",
+        "command": [
+            "xdg-open",
+            "heroic://launch?appName=1443428641&runner=gog&gui=false"
+        ],
+        "source": "heroic-gog",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "id": "epic-gog:e8bbb84be35640cda646233152ff3428",
+        "title": "Brotato",
+        "command": [
+            "xdg-open",
+            "heroic://launch?appName=e8bbb84be35640cda646233152ff3428&runner=legendary&gui=false"
+        ],
+        "source": "heroic-epic",
+        "cover": null,
+        "hidden": false
+    },
+    {
+        "id": "amazon-gog:amzn1.adg.product.9274ae27-f99c-4594-a917-9cc01e3f65ad",
+        "title": "Golfie",
+        "command": [
+            "xdg-open",
+            "heroic://launch?appName=amzn1.adg.product.9274ae27-f99c-4594-a917-9cc01e3f65ad&runner=nile&gui=false"
+        ],
+        "source": "amazon-gog",
         "cover": null,
         "hidden": false
     }
