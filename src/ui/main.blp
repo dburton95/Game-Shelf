@@ -1,0 +1,57 @@
+using Gtk 4.0;
+using Adw 1;
+
+
+
+Adw.ApplicationWindow main {
+    
+    width-request: 730;
+    height-request: 520;
+    content: Adw.NavigationSplitView {
+        sidebar: Adw.NavigationPage {
+            child: Adw.ToolbarView {
+                [top]
+                Adw.HeaderBar {
+                    title-widget: Label {
+                    label: _("Runners");
+                    };
+                }
+                content: Adw.Sidebar {
+                    Adw.SidebarSection {
+                        Adw.SidebarItem {
+                          title: "All Platforms";
+                        }
+                        Adw.SidebarItem {
+                            title: "Steam";
+                        }
+                        Adw.SidebarItem {
+                          title: "Lutris";
+                        }
+                        Adw.SidebarItem {
+                          title: "Heroic";
+                        }
+                        Adw.SidebarItem {
+                          title: "Desktop Files";
+                        }
+                        Adw.SidebarItem {
+                          title: "Manual Entries";
+                        }
+                    }
+                };
+            };
+        };
+        content: Adw.NavigationPage {
+            child: Adw.ToolbarView {
+                [top]
+                Adw.HeaderBar {
+                    title-widget: Label {
+                        label: _("Games");
+                    };
+                }
+                content: Label {
+                    label: _("Placeholder");
+                };
+            };
+        };
+    };
+}
