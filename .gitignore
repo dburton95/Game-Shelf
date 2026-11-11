@@ -161,5 +161,11 @@ cython_debug/
 
 PROGRESS.md
 
+# Blueprint-compiled UI files — generated from .blp source, not hand-written
+*.ui
+
 # Local game library data (user-specific, not meant to be versioned)
 games.json
+hello.blp
+.gitignore
+helloworld.py
