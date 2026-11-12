@@ -169,3 +169,6 @@ games.json
 hello.blp
 .gitignore
 helloworld.py
+
+*.compiled
+/data/covers/*
