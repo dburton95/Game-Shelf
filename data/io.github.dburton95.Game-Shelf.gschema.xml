@@ -1,0 +1,8 @@
+<schemalist>
+  <schema id="io.github.dburton95.Game-Shelf" path="/io/github/dburton95/Game-Shelf/">
+    <key name="steamgriddb-api-key" type="s">
+      <default>""</default>
+      <summary>SteamGridDB API key</summary>
+    </key>
+  </schema>
+</schemalist>

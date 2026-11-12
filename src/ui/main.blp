@@ -5,8 +5,10 @@ using Adw 1;
 
 Adw.ApplicationWindow main {
     
-    width-request: 730;
-    height-request: 520;
+    default-width: 850;
+    default-height: 550;
+    width-request: 850;
+    height-request: 600;
     content: Adw.NavigationSplitView {
         sidebar: Adw.NavigationPage {
             child: Adw.ToolbarView {
@@ -16,27 +18,8 @@ Adw.ApplicationWindow main {
                     label: _("Runners");
                     };
                 }
-                content: Adw.Sidebar {
-                    Adw.SidebarSection {
-                        Adw.SidebarItem {
-                          title: "All Platforms";
-                        }
-                        Adw.SidebarItem {
-                            title: "Steam";
-                        }
-                        Adw.SidebarItem {
-                          title: "Lutris";
-                        }
-                        Adw.SidebarItem {
-                          title: "Heroic";
-                        }
-                        Adw.SidebarItem {
-                          title: "Desktop Files";
-                        }
-                        Adw.SidebarItem {
-                          title: "Manual Entries";
-                        }
-                    }
+                content: Adw.Sidebar sidebar {
+                    Adw.SidebarSection sourceList {}
                 };
             };
         };
@@ -48,8 +31,11 @@ Adw.ApplicationWindow main {
                         label: _("Games");
                     };
                 }
-                content: Label {
-                    label: _("Placeholder");
+                content: ScrolledWindow {                
+                    FlowBox gamesList {
+                        homogeneous: true;
+                        min-children-per-line: 2;
+                    }
                 };
             };
         };
