@@ -10,14 +10,15 @@ from pathlib import Path
 from src.gameshelf.core.library import LibraryManager
 from src.gameshelf.core.host import HostRunner
 from src.gameshelf.core.importers import desktop, heroic, steam, lutris
-from src.gameshelf.core.covers import updateCovers
+from src.gameshelf.core.covers import downloadCover
+from src.gameshelf.core.models import GameCard
 
 
 builder = Gtk.Builder()
 uiPath = Path(__file__).parent / "src/ui/main.ui"
 manager = LibraryManager()
 sources = ["all", "steam", "lutris", "heroic", "desktop", "manual"]
-placeholderPath = Path(__file__).parent / "src/ui/placeholder.png"
+
 
 
 def mergeGamesList(existingById, newGames, source):
@@ -44,8 +45,17 @@ def buildGamesList():
     refreshCovers()
 
 def refreshCovers():
-    updateCovers()
-    GLib.idle_add(refreshGamesList)
+    library = LibraryManager().load("games.json")
+    for game in library:
+        if downloadCover(game):
+            jsonOutput = [g.to_dict() for g in library]
+            with open("games.json", "w") as gamesFile:
+                json.dump(jsonOutput, gamesFile, indent=4)
+            GLib.idle_add(refreshSingleCover, game)
+
+def refreshSingleCover(game):
+    if game.id in gameCards:
+        gameCards[game.id].updateCover(game.cover)
 
 def refreshGamesList():
     global existingById
@@ -54,23 +64,17 @@ def refreshGamesList():
     gamesList.remove_all()
     showGames(list(existingById.values()))
 
+gameCards = {}
 
 def showGames(list):
-    list = sorted(list, key=lambda game: game.title)
-    for game in list:
-        entry = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        coverPath = game.cover if game.cover else placeholderPath
-        cover = Gtk.Picture.new_for_filename(str(coverPath))
-        cover.set_size_request(-1, 250)
-        title = Gtk.Label(label=game.title, ellipsize=Pango.EllipsizeMode.END, max_width_chars=20)
-        entry.append(cover)
-        entry.append(title)
-        formattedEntry = Adw.Clamp(maximum_size=150)
-        formattedEntry.set_child(entry)
-        formattedEntry.gameData = game
-        gamesList.append(formattedEntry)
-        wrapper = formattedEntry.get_parent()
-        wrapper.set_valign(Gtk.Align.START) 
+    gameCards.clear()
+    for game in sorted(list, key=lambda game: game.title):
+        entry = GameCard(game)
+        gameCards[game.id] = entry
+        gamesList.append(entry.widget)
+        entry.widget.get_parent().set_valign(Gtk.Align.START)
+
+
 
 def on_activate(app):
     global gamesList, existingById, existingGames
@@ -98,8 +102,8 @@ def on_activate(app):
     
 
 def on_game_clicked(flowbox, row):
-    game = row.get_child().gameData
-    HostRunner().run(game.command)
+    entry = row.get_child().entryRef
+    HostRunner().run(entry.game.command)
     app.quit()
 
 def on_source_clicked(sidebar, index):
