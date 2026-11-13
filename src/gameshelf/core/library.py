@@ -1,4 +1,5 @@
 import json
+import os
 from gameshelf.core.models import Game
 
 class LibraryManager:
@@ -31,3 +32,10 @@ class LibraryManager:
             else:
                 existingGames[newGame.id] = newGame
         return existingGames
+
+    def save(self, gamesFile, games):
+        jsonOutput = [game.to_dict() for game in games]
+        tempPath = f"{gamesFile}.tmp"
+        with open(tempPath, "w") as f:
+            json.dump(jsonOutput, f, indent=4)
+        os.replace(tempPath, gamesFile)
