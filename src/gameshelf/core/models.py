@@ -30,20 +30,36 @@ class Game:
 
 
 class GameCard:
-    def __init__(self, game):
+    def __init__(self, game, onEditRequested):
         self.game = game
+        self.onEditRequested = onEditRequested
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         coverPath = game.cover if game.cover else placeholderPath
         self.cover = Gtk.Picture.new_for_filename(str(coverPath))
         self.cover.set_size_request(-1, 250)
+        self.cover.add_css_class("game-cover")
+
+        coverOverlay = Gtk.Overlay()
+        coverOverlay.set_child(self.cover)
+        editButton = Gtk.Button(icon_name="document-edit-symbolic")
+        editButton.add_css_class("edit-button")
+        editButton.set_halign(Gtk.Align.END)
+        editButton.set_valign(Gtk.Align.END)
+        coverOverlay.add_overlay(editButton)
+        editButton.connect("clicked", self.onEditClicked)
+
         title = Gtk.Label(label=game.title, ellipsize=Pango.EllipsizeMode.END, max_width_chars=20)
-        box.append(self.cover)
+        box.append(coverOverlay)
         box.append(title)
 
         self.widget = Adw.Clamp(maximum_size=150)
         self.widget.set_child(box)
         self.widget.entryRef = self
 
+
     def updateCover(self, path):
         self.cover.set_filename(path if path else str(placeholderPath))
+
+    def onEditClicked(self, button):
+        self.onEditRequested(self.game)

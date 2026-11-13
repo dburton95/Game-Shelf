@@ -3,16 +3,17 @@ import threading
 import gi
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
-from gi.repository import Gtk, Adw
+from gi.repository import Gtk, Adw, Gdk
 from pathlib import Path
 from src.gameshelf.core.library import LibraryManager
 from src.gameshelf.core.host import HostRunner
 from src.gameshelf.core.models import GameCard
 from src.gameshelf.core.library_builder import buildGamesList
-
+from src.gameshelf.core.paths import uiPath
+from src.gameshelf.core.game_edit import openEditWindow
 
 builder = Gtk.Builder()
-uiPath = Path(__file__).parent / "src/ui/main.ui"
+mainUiPath = Path(uiPath) / "main.ui"
 manager = LibraryManager()
 sources = ["all", "steam", "lutris", "heroic", "desktop", "manual"]
 
@@ -34,7 +35,7 @@ gameCards = {}
 def showGames(list):
     gameCards.clear()
     for game in sorted(list, key=lambda game: game.title):
-        entry = GameCard(game)
+        entry = GameCard(game, on_edit_clicked)
         gameCards[game.id] = entry
         gamesList.append(entry.widget)
         entry.widget.get_parent().set_valign(Gtk.Align.START)
@@ -42,9 +43,20 @@ def showGames(list):
 
 
 def on_activate(app):
-    global gamesList, existingById, existingGames
+    global gamesList, existingById, existingGames, window
+
+    stylePath = Path(__file__).parent / "src/ui/style.css"
+    cssProvider = Gtk.CssProvider()
+    cssProvider.load_from_path(str(stylePath))
+
+    Gtk.StyleContext.add_provider_for_display(
+        Gdk.Display.get_default(),
+        cssProvider,
+        Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+    )
+
     existingGames = manager.load("games.json")
-    builder.add_from_file(str(uiPath))
+    builder.add_from_file(str(mainUiPath))
     window = builder.get_object("main")
     window.set_application(app)
 
@@ -81,6 +93,11 @@ def on_source_clicked(sidebar, index):
         filtered = [game for game in existingById.values() if game.source == source]
     gamesList.remove_all()
     showGames(filtered)
+
+def on_edit_clicked(game):
+    openEditWindow(game, window)
+
+
 app = Adw.Application(application_id="io.github.dburton95.Game-Shelf")
 app.connect("activate", on_activate)
 app.run(sys.argv)
