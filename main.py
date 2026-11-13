@@ -1,17 +1,14 @@
 import sys
 import threading
 import gi
-import json
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
-gi.require_version("Pango", "1.0")
-from gi.repository import Gtk, Adw, Pango, GLib
+from gi.repository import Gtk, Adw
 from pathlib import Path
 from src.gameshelf.core.library import LibraryManager
 from src.gameshelf.core.host import HostRunner
-from src.gameshelf.core.importers import desktop, heroic, steam, lutris
-from src.gameshelf.core.covers import downloadCover
 from src.gameshelf.core.models import GameCard
+from src.gameshelf.core.library_builder import buildGamesList
 
 
 builder = Gtk.Builder()
@@ -20,38 +17,6 @@ manager = LibraryManager()
 sources = ["all", "steam", "lutris", "heroic", "desktop", "manual"]
 
 
-
-def mergeGamesList(existingById, newGames, source):
-    gamesList = manager.merge(existingById, newGames, source)
-    return gamesList
-
-def buildGamesList():
-    existingById = manager.list_by_id(existingGames)
-    desktopGames = desktop.run()
-    heroicGames = heroic.run()
-    steamGames = steam.run()
-    lutrisGames = lutris.run()
-    existingById = mergeGamesList(existingById, desktopGames, "desktop")
-    for source, games in heroicGames.items():
-        existingById = mergeGamesList(existingById, games, source)
-    existingById = mergeGamesList(existingById, steamGames, "steam")
-    existingById = mergeGamesList(existingById, lutrisGames, "lutris")
-    jsonOutput = []
-    for game in existingById.values():
-        jsonOutput.append(game.to_dict())
-    with open("games.json", "w") as gamesFile:
-        json.dump(jsonOutput,gamesFile, indent=4)
-    GLib.idle_add(refreshGamesList)
-    refreshCovers()
-
-def refreshCovers():
-    library = LibraryManager().load("games.json")
-    for game in library:
-        if downloadCover(game):
-            jsonOutput = [g.to_dict() for g in library]
-            with open("games.json", "w") as gamesFile:
-                json.dump(jsonOutput, gamesFile, indent=4)
-            GLib.idle_add(refreshSingleCover, game)
 
 def refreshSingleCover(game):
     if game.id in gameCards:
@@ -97,7 +62,7 @@ def on_activate(app):
     sidebar.connect("activated", on_source_clicked)
 
     window.present()
-    threading.Thread(target=buildGamesList).start()
+    threading.Thread(target=buildGamesList, args=(existingGames, refreshGamesList, refreshSingleCover), daemon=True).start()
 
     
 
