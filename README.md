@@ -1,8 +1,8 @@
-# Game Shelf
+<h1 align="center">Game Shelf</h1>
 
 <p align="center">
-  <a href="https://github.com/sponsors/dburton95"><img src="https://img.shields.io/badge/Sponsor-%E2%9D%A4-ea4aaa?logo=github" alt="Sponsor"></a>
-  <a href="https://ko-fi.com/dgray66"><img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"></a>
+  <a href="https://github.com/sponsors/dburton95"><img src="https://img.shields.io/badge/Sponsor-%E2%9D%A4-ea4aaa?logo=github" alt="Sponsor" height="20"></a>
+  <a href="https://ko-fi.com/dgray66"><img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi" height="20"></a>
 </p>
 
 A GTK4 + Libadwaita game launcher for Linux that gathers your games from every
