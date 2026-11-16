@@ -2,8 +2,47 @@ using Gtk 4.0;
 using Adw 1;
 
 Adw.Window gameEdit {
+  default-height: 500;
+  default-width: 750;
   content: Adw.ToolbarView {
     [top]
     Adw.HeaderBar header {}
+    content: Box {
+      valign: start;
+      orientation: horizontal;
+      homogeneous: true;
+      Picture gameCover {}
+      Box {
+        orientation: vertical;
+        Adw.Clamp {
+          orientation: vertical;
+          maximum-size: 10;
+          Box {
+            orientation: horizontal;
+            vexpand: false;
+            Button changeCover {
+              label: _("Change Cover");
+            }
+            Button resetCover {
+              icon-name: "view-refresh-symbolic";
+            }
+            Label {
+              label: _("Hidden: ");
+            }
+            Switch hideSwitch {}
+          }
+        }
+        Label {
+          label: _("Title:");
+          halign: start;
+        }
+        Label currentTitle{}
+        Label {
+          label: _("Launch Command");
+          halign: start;
+        }
+        Label currentCommand{}
+      }
+    };
   };
 }

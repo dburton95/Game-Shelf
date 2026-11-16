@@ -8,7 +8,7 @@ from pathlib import Path
 from src.gameshelf.core.library import LibraryManager
 from src.gameshelf.core.host import HostRunner
 from src.gameshelf.core.models import GameCard
-from src.gameshelf.core.library_builder import buildGamesList
+from src.gameshelf.core.library_builder import buildGamesList, refreshSingleCover
 from src.gameshelf.core.paths import uiPath
 from src.gameshelf.core.game_edit import openEditWindow
 
@@ -18,10 +18,6 @@ manager = LibraryManager()
 sources = ["all", "steam", "lutris", "heroic", "desktop", "manual"]
 
 
-
-def refreshSingleCover(game):
-    if game.id in gameCards:
-        gameCards[game.id].updateCover(game.cover)
 
 def refreshGamesList():
     global existingById
@@ -74,7 +70,7 @@ def on_activate(app):
     sidebar.connect("activated", on_source_clicked)
 
     window.present()
-    threading.Thread(target=buildGamesList, args=(existingGames, refreshGamesList, refreshSingleCover), daemon=True).start()
+    threading.Thread(target=buildGamesList, args=(existingGames, refreshGamesList, lambda game: refreshSingleCover(game, gameCards)), daemon=True).start()
 
     
 
@@ -95,7 +91,7 @@ def on_source_clicked(sidebar, index):
     showGames(filtered)
 
 def on_edit_clicked(game):
-    openEditWindow(game, window)
+    openEditWindow(game, window, gameCards)
 
 
 app = Adw.Application(application_id="io.github.dburton95.Game-Shelf")
