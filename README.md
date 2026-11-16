@@ -1,5 +1,10 @@
 # Game Shelf
 
+<p align="center">
+  <a href="https://github.com/sponsors/dburton95"><img src="https://img.shields.io/badge/Sponsor-%E2%9D%A4-ea4aaa?logo=github" alt="Sponsor"></a>
+  <a href="https://ko-fi.com/dgray66"><img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"></a>
+</p>
+
 A GTK4 + Libadwaita game launcher for Linux that gathers your games from every
 source you actually use into one native GNOME shelf. Built as an actively maintained replacement for
 [Cartridges](https://github.com/kra-mo/cartridges), which is no longer
@@ -8,9 +13,6 @@ maintained.
 > **Status: early development.** Core scanning, launching, and the main
 > window all work day-to-day; packaging, a preferences UI, and a few other
 > pieces listed in [Roadmap](#roadmap) aren't built yet. Expect rough edges.
-
-[![Sponsor](https://img.shields.io/badge/Sponsor-%E2%9D%A4-ea4aaa?logo=github)](https://github.com/sponsors/dburton95)
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/dgray66)
 
 ## What it does
 
