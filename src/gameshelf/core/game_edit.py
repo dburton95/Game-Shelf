@@ -68,8 +68,10 @@ def changeCover(game, window, gameCoverWidget, gameCards):
 def resetCover(game, gameCards, gameCoverWidget):
     download = downloadCover(game)
     if not download:
-        game.cover = placeholderPath
-    gameCoverWidget.set_filename(game.cover)
+        game.cover = None
+        gameCoverWidget.set_filename(str(placeholderPath))
+    else:
+        gameCoverWidget.set_filename(str(game.cover))
     refreshSingleCover(game, gameCards)
 
     library = LibraryManager().load("games.json")
