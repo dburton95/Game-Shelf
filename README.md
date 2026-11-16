@@ -9,7 +9,8 @@ maintained.
 > window all work day-to-day; packaging, a preferences UI, and a few other
 > pieces listed in [Roadmap](#roadmap) aren't built yet. Expect rough edges.
 
-### If you like my work, considering donating by clicking the Sponsor button at the top of the page.
+[![Sponsor](https://img.shields.io/badge/Sponsor-%E2%9D%A4-ea4aaa?logo=github)](https://github.com/sponsors/dburton95)
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/dgray66)
 
 ## What it does
 
