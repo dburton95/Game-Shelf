@@ -14,6 +14,13 @@ Adw.Window gameEdit {
       Picture gameCover {}
       Box {
         orientation: vertical;
+        Box {
+          orientation: horizontal;
+          Label {
+            label: _("Hidden: ");
+          }
+          Switch hideSwitch {}
+        }
         Adw.Clamp {
           orientation: vertical;
           maximum-size: 10;
@@ -23,13 +30,12 @@ Adw.Window gameEdit {
             Button changeCover {
               label: _("Change Cover");
             }
+            Button searchSgdb {
+              label: _("Search SteamGDB");
+            }
             Button resetCover {
               icon-name: "view-refresh-symbolic";
             }
-            Label {
-              label: _("Hidden: ");
-            }
-            Switch hideSwitch {}
           }
         }
         Label {

@@ -15,16 +15,17 @@ from src.gameshelf.core.game_edit import openEditWindow
 builder = Gtk.Builder()
 mainUiPath = Path(uiPath) / "main.ui"
 manager = LibraryManager()
-sources = ["all", "steam", "lutris", "heroic", "desktop", "manual"]
-
+sources = ["all", "steam", "lutris", "heroic", "desktop", "manual", "hidden"]
+currentSource = "all"
+existingGames = manager.load("games.json")
+existingById = manager.list_by_id(existingGames)
 
 
 def refreshGamesList():
     global existingById
-    existingGames = manager.load("games.json")
-    existingById = manager.list_by_id(existingGames)
+    filtered = getFilteredGames(currentSource, existingById.values())
     gamesList.remove_all()
-    showGames(list(existingById.values()))
+    showGames(filtered)
 
 gameCards = {}
 
@@ -59,7 +60,8 @@ def on_activate(app):
     gamesList = builder.get_object("gamesList")
     gamesList.connect("child-activated", on_game_clicked)
 
-    showGames(existingGames)
+    filtered = getFilteredGames(currentSource, existingGames)
+    showGames(filtered)
       
     sourceList = builder.get_object("sourceList")
     for source in sources:
@@ -79,19 +81,37 @@ def on_game_clicked(flowbox, row):
     HostRunner().run(entry.game.command)
     app.quit()
 
+
+def getFilteredGames(source, list):
+    for entry in list:
+        if source == "hidden":
+            filtered = [game for game in existingById.values() if game.hidden]
+        elif source == "all":
+            filtered = [game for game in existingById.values() if not game.hidden]
+        elif source == "heroic":
+            filtered = [game for game in existingById.values() if game.source in ["heroic-gog", "heroic-epic", "heroic-amazon"] and not game.hidden]
+        else:
+            filtered = [game for game in existingById.values() if game.source == source and not game.hidden]
+        return filtered
+
 def on_source_clicked(sidebar, index):
-    source = sources[index]
-    if source == "all":
-        filtered = list(existingById.values())
-    elif source == "heroic":
-        filtered = [game for game in existingById.values() if game.source in ["heroic-gog", "heroic-epic", "heroic-amazon"]]
-    else:
-        filtered = [game for game in existingById.values() if game.source == source]
+    global currentSource
+    currentSource = sources[index]
+    filtered = getFilteredGames(currentSource, existingById.values())
     gamesList.remove_all()
     showGames(filtered)
 
+
 def on_edit_clicked(game):
-    openEditWindow(game, window, gameCards)
+    openEditWindow(
+        game,
+        window,
+        gameCards,
+        gamesList,
+        showGames,
+        getFilteredGames,
+        currentSource
+    )
 
 
 app = Adw.Application(application_id="io.github.dburton95.Game-Shelf")

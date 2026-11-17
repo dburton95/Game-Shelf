@@ -9,12 +9,23 @@ from gameshelf.core.library import LibraryManager
 import shutil
 from gameshelf.core.library_builder import refreshSingleCover
 from gameshelf.core.covers import downloadCover
+from urllib.parse import quote
+
 
 editBuilder = Gtk.Builder()
 uiPathEdit = Path(uiPath) / "game-edit.ui"
 manager = LibraryManager()
+library = LibraryManager().load("games.json")
 
-def openEditWindow(game, window, gameCards):
+def openEditWindow(
+        game,
+        window,
+        gameCards,
+        gamesList,
+        showGames,
+        getFilteredGames,
+        currentSource
+    ):
     editBuilder.add_from_file(str(uiPathEdit))
     editWindow = editBuilder.get_object("gameEdit")
 
@@ -31,6 +42,13 @@ def openEditWindow(game, window, gameCards):
 
     resetCoverButton = editBuilder.get_object("resetCover")
     resetCoverButton.connect("clicked", lambda button: resetCover(game, gameCards, gameCover))
+
+    hideSwitch = editBuilder.get_object("hideSwitch")
+    hideSwitch.connect("state-set", lambda switch, state: onHideToggled(switch, state, game, gamesList, showGames, getFilteredGames, currentSource))
+    hideSwitch.set_active(game.hidden)
+
+    searchSgdbButton = editBuilder.get_object("searchSgdb")
+    searchSgdbButton.connect("clicked", lambda button: searchSgdb(game, editWindow))
 
     editWindow.set_transient_for(window)
     editWindow.present()
@@ -56,7 +74,6 @@ def changeCover(game, window, gameCoverWidget, gameCards):
         gameCoverWidget.set_filename(game.cover)
         refreshSingleCover(game, gameCards)
 
-        library = LibraryManager().load("games.json")
         for entry in library:
             if entry.id == game.id:
                 entry.cover = game.cover
@@ -74,7 +91,6 @@ def resetCover(game, gameCards, gameCoverWidget):
         gameCoverWidget.set_filename(str(game.cover))
     refreshSingleCover(game, gameCards)
 
-    library = LibraryManager().load("games.json")
     for entry in library:
         if entry.id == game.id:
             entry.cover = game.cover
@@ -82,3 +98,39 @@ def resetCover(game, gameCards, gameCoverWidget):
     manager.save("games.json", library)    
 
     
+def onHideToggled(
+        switch,
+        state,
+        game,
+        gamesList,
+        showGames,
+        getFilteredGames,
+        currentSource
+    ):
+    if state:
+        game.hidden = True
+    else:
+        game.hidden = False
+    
+    for entry in library:
+        if entry.id == game.id:
+            entry.hidden = game.hidden
+            break
+    manager.save("games.json", library)
+    filtered = getFilteredGames(currentSource, gamesList)
+    gamesList.remove_all()
+    showGames(filtered)
+
+def searchSgdb(game, window):
+    def onSearchLaunched(launcher, result):
+        try: 
+            launcher.launch_finish(result)
+            print(result)
+        except GLib.Error as e:
+            print(e)
+            pass
+
+    searchUrl = f"https://www.steamgriddb.com/search/grids?term={quote(game.title)}"
+    launcher = Gtk.UriLauncher.new(searchUrl)
+    launcher.launch(window, None, onSearchLaunched)
+
