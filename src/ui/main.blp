@@ -2,6 +2,11 @@ using Gtk 4.0;
 using Adw 1;
 
 
+menu main_menu {
+    item (_("Rescan Games"), "app.rescan")
+    item (_("Preferences"), "app.preferences")
+}
+
 
 Adw.ApplicationWindow main {
     
@@ -30,6 +35,12 @@ Adw.ApplicationWindow main {
                     title-widget: Label {
                         label: _("Games");
                     };
+                [start]
+                MenuButton {
+                  icon-name: "open-menu-symbolic";
+                  menu-model: main_menu;
+                  primary: true;
+                }
                 }
                 content: ScrolledWindow {                
                     FlowBox gamesList {
@@ -41,3 +52,4 @@ Adw.ApplicationWindow main {
         };
     };
 }
+

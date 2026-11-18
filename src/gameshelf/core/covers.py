@@ -8,8 +8,10 @@ from gameshelf.core.paths import DATA_DIR
 from gi.repository import Gio
 from urllib.parse import quote
 
+settings = Gio.Settings.new("io.github.dburton95.Game-Shelf")
+
+
 def downloadCover(game):
-    settings = Gio.Settings.new("io.github.dburton95.Game-Shelf")
     apiKey = settings.get_string("steamgriddb-api-key")
     headers = {"authorization": f"Bearer {apiKey}"}
 
@@ -34,7 +36,7 @@ def downloadCover(game):
         grids = gridsResponse.json()
         if not grids["data"]:
             return False
-        gridResponse = requests.get(grids["data"][0]["url"])
+        gridResponse = requests.get(grids["data"][0]["url"], timeout=5,)
         coverFile = DATA_DIR / f"covers/{game.id}.png"
         coverFile.write_bytes(gridResponse.content)
         game.cover = str(coverFile)

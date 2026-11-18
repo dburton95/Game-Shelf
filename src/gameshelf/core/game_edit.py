@@ -50,6 +50,12 @@ def openEditWindow(
     searchSgdbButton = editBuilder.get_object("searchSgdb")
     searchSgdbButton.connect("clicked", lambda button: searchSgdb(game, editWindow))
 
+    currentTitle = editBuilder.get_object("currentTitle")
+    currentTitle.set_label(game.title)
+
+    currentCommand = editBuilder.get_object("currentCommand")
+    currentCommand.set_label(" ".join(game.command))
+
     editWindow.set_transient_for(window)
     editWindow.present()
 

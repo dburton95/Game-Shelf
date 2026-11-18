@@ -1,9 +1,8 @@
 import sys
-import threading
 import gi
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
-from gi.repository import Gtk, Adw, Gdk
+from gi.repository import Gtk, Adw, Gdk, Gio
 from pathlib import Path
 from src.gameshelf.core.library import LibraryManager
 from src.gameshelf.core.host import HostRunner
@@ -11,6 +10,7 @@ from src.gameshelf.core.models import GameCard
 from src.gameshelf.core.library_builder import buildGamesList, refreshSingleCover
 from src.gameshelf.core.paths import uiPath
 from src.gameshelf.core.game_edit import openEditWindow
+from concurrent.futures import ThreadPoolExecutor
 
 builder = Gtk.Builder()
 mainUiPath = Path(uiPath) / "main.ui"
@@ -19,10 +19,12 @@ sources = ["all", "steam", "lutris", "heroic", "desktop", "manual", "hidden"]
 currentSource = "all"
 existingGames = manager.load("games.json")
 existingById = manager.list_by_id(existingGames)
+scanExecutor = ThreadPoolExecutor(max_workers=1)
 
 
 def refreshGamesList():
     global existingById
+    existingById = manager.list_by_id(manager.load("games.json"))
     filtered = getFilteredGames(currentSource, existingById.values())
     gamesList.remove_all()
     showGames(filtered)
@@ -71,8 +73,16 @@ def on_activate(app):
     sidebar = builder.get_object("sidebar")
     sidebar.connect("activated", on_source_clicked)
 
+    rescan_action = Gio.SimpleAction.new("rescan", None)
+    rescan_action.connect(
+        "activate",
+        lambda action, param: scanExecutor.submit(buildGamesList, existingGames, refreshGamesList, lambda game: refreshSingleCover(game, gameCards))
+    )
+    app.add_action(rescan_action)
+
     window.present()
-    threading.Thread(target=buildGamesList, args=(existingGames, refreshGamesList, lambda game: refreshSingleCover(game, gameCards)), daemon=True).start()
+    scanExecutor.submit(buildGamesList, existingGames, refreshGamesList, lambda game: refreshSingleCover(game, gameCards))
+
 
     
 
