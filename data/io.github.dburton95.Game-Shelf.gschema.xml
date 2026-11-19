@@ -4,5 +4,9 @@
       <default>""</default>
       <summary>SteamGridDB API key</summary>
     </key>
+    <key name="max-games-per-row" type="u">
+      <default>5</default>
+      <summary>Index of the max games per row choice</summary>
+    </key>
   </schema>
 </schemalist>

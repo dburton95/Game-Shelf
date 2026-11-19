@@ -1,0 +1,23 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.Window preferences {
+  default-height: 500;
+  default-width: 750;
+  content: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+       title-widget: Label {
+         label: _("Preferences");
+       };
+    }
+    content: Adw.PreferencesPage {
+        Adw.PreferencesGroup {
+            Adw.ComboRow rowMax {
+                title: _("Max Games Per Row");
+                model: Gtk.StringList {strings ["2", "3", "4", "5", "6", "7"]};
+            }
+        }
+    };
+  };
+}

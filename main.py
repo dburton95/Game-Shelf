@@ -9,8 +9,9 @@ from src.gameshelf.core.host import HostRunner
 from src.gameshelf.core.models import GameCard
 from src.gameshelf.core.library_builder import buildGamesList, refreshSingleCover
 from src.gameshelf.core.paths import uiPath
-from src.gameshelf.core.game_edit import openEditWindow
+from src.gameshelf.windows.game_editor import openEditWindow
 from concurrent.futures import ThreadPoolExecutor
+from src.gameshelf.windows.preferences import openPrefWindow
 
 builder = Gtk.Builder()
 mainUiPath = Path(uiPath) / "main.ui"
@@ -20,6 +21,7 @@ currentSource = "all"
 existingGames = manager.load("games.json")
 existingById = manager.list_by_id(existingGames)
 scanExecutor = ThreadPoolExecutor(max_workers=1)
+settings = Gio.Settings.new("io.github.dburton95.Game-Shelf")
 
 
 def refreshGamesList():
@@ -60,6 +62,10 @@ def on_activate(app):
     window.set_application(app)
 
     gamesList = builder.get_object("gamesList")
+    rowMaxIndex = settings.get_uint("max-games-per-row")
+    maxPerRow = rowMaxIndex + 2
+    gamesList.set_max_children_per_line(maxPerRow)
+    settings.connect("changed::max-games-per-row", on_max_games_per_row_changed)
     gamesList.connect("child-activated", on_game_clicked)
 
     filtered = getFilteredGames(currentSource, existingGames)
@@ -79,6 +85,13 @@ def on_activate(app):
         lambda action, param: scanExecutor.submit(buildGamesList, existingGames, refreshGamesList, lambda game: refreshSingleCover(game, gameCards))
     )
     app.add_action(rescan_action)
+
+    prefs_action = Gio.SimpleAction.new("preferences", None)
+    prefs_action.connect(
+        "activate",
+        lambda action, param: openPrefWindow(window)
+    )
+    app.add_action(prefs_action)
 
     window.present()
     scanExecutor.submit(buildGamesList, existingGames, refreshGamesList, lambda game: refreshSingleCover(game, gameCards))
@@ -122,6 +135,10 @@ def on_edit_clicked(game):
         getFilteredGames,
         currentSource
     )
+
+def on_max_games_per_row_changed(settings, key):
+    index = settings.get_uint(key)
+    gamesList.set_max_children_per_line(index + 2)
 
 
 app = Adw.Application(application_id="io.github.dburton95.Game-Shelf")
