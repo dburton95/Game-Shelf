@@ -2,6 +2,8 @@ import json
 import os
 from gameshelf.core.models import Game
 
+sources = ["all", "steam", "lutris", "heroic", "desktop", "manual", "hidden"]
+
 class LibraryManager:
     def load(self, gamesFile):
         with open(gamesFile, "r") as f:
@@ -21,6 +23,8 @@ class LibraryManager:
         return gamesById
 
     def merge(self, existingGames, newGames, source):
+        if newGames is None:
+            return existingGames
         newGameIds = {g.id for g in newGames}
         for id, existingGame in list(existingGames.items()):
             if existingGame.source == source and existingGame.id not in newGameIds:

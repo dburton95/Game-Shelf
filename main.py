@@ -4,7 +4,7 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Gtk, Adw, Gdk, Gio
 from pathlib import Path
-from src.gameshelf.core.library import LibraryManager
+from src.gameshelf.core.library import LibraryManager, sources
 from src.gameshelf.core.host import HostRunner
 from src.gameshelf.core.models import GameCard
 from src.gameshelf.core.library_builder import buildGamesList, refreshSingleCover
@@ -13,10 +13,10 @@ from src.gameshelf.windows.game_editor import openEditWindow
 from concurrent.futures import ThreadPoolExecutor
 from src.gameshelf.windows.preferences import openPrefWindow
 
+
 builder = Gtk.Builder()
 mainUiPath = Path(uiPath) / "main.ui"
 manager = LibraryManager()
-sources = ["all", "steam", "lutris", "heroic", "desktop", "manual", "hidden"]
 currentSource = "all"
 existingGames = manager.load("games.json")
 existingById = manager.list_by_id(existingGames)
@@ -41,6 +41,11 @@ def showGames(list):
         gamesList.append(entry.widget)
         entry.widget.get_parent().set_valign(Gtk.Align.START)
 
+def buildSourceList():
+    sourceList = builder.get_object("sourceList")
+    for source in sources:
+        entry = Adw.SidebarItem(title=source.capitalize())
+        sourceList.append(entry)
 
 
 def on_activate(app):
@@ -71,10 +76,7 @@ def on_activate(app):
     filtered = getFilteredGames(currentSource, existingGames)
     showGames(filtered)
       
-    sourceList = builder.get_object("sourceList")
-    for source in sources:
-        entry = Adw.SidebarItem(title=source.capitalize())
-        sourceList.append(entry)
+    buildSourceList()
 
     sidebar = builder.get_object("sidebar")
     sidebar.connect("activated", on_source_clicked)
@@ -133,7 +135,8 @@ def on_edit_clicked(game):
         gamesList,
         showGames,
         getFilteredGames,
-        currentSource
+        currentSource,
+        existingById
     )
 
 def on_max_games_per_row_changed(settings, key):

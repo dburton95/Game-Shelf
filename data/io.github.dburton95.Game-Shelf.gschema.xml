@@ -8,5 +8,17 @@
       <default>5</default>
       <summary>Index of the max games per row choice</summary>
     </key>
+    <key name="steam-state" type="b">
+      <default>true</default>
+    </key>
+    <key name="lutris-state" type="b">
+      <default>true</default>
+    </key>
+    <key name="heroic-state" type="b">
+      <default>true</default>
+    </key>
+    <key name="desktop-state" type="b">
+      <default>true</default>
+    </key>
   </schema>
 </schemalist>

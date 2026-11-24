@@ -12,45 +12,46 @@ Adw.Window gameEdit {
       orientation: horizontal;
       homogeneous: true;
       Picture gameCover {}
-      Box {
-        orientation: vertical;
-        Box {
-          orientation: horizontal;
-          Label {
-            label: _("Hidden: ");
-          }
-          Switch hideSwitch {}
-        }
-        Adw.Clamp {
+      Adw.Clamp{
+        orientation: horizontal;
+        maximum-size: 300;
+        Box allSettings {
           orientation: vertical;
-          maximum-size: 10;
+          Adw.PreferencesGroup {
+            title: _("About");
+            Adw.ActionRow currentTitle {
+              title: _("Title");
+            }
+            Adw.ActionRow currentCommand {
+              title: _("Launch Command");
+            }
+          }
           Box {
             orientation: horizontal;
-            vexpand: false;
-            Button changeCover {
-              label: _("Change Cover");
-            }
-            Button searchSgdb {
-              label: _("Search SteamGDB");
-            }
-            Button resetCover {
-              icon-name: "view-refresh-symbolic";
+            Adw.PreferencesGroup {
+              title: _("Settings");
+              Adw.SwitchRow hideSwitch {
+                title: _("Hidden");
+              }
+              Adw.Clamp {
+                orientation: vertical;
+                maximum-size: 10;
+                Box {
+                  orientation: horizontal;
+                  vexpand: false;
+                  Button changeCover {
+                    label: _("Change Cover");
+                  }
+                  Button searchSgdb {
+                    label: _("Search SteamGDB");
+                  }
+                  Button resetCover {
+                    icon-name: "view-refresh-symbolic";
+                  }
+                }
+              }
             }
           }
-        }
-        Label {
-          label: _("Title:");
-          halign: start;
-        }
-        Label currentTitle {
-          halign: start;
-        }
-        Label {
-          label: _("Launch Command");
-          halign: start;
-        }
-        Label currentCommand {
-          halign: start;
         }
       }
     };

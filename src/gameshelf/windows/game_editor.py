@@ -15,7 +15,6 @@ from urllib.parse import quote
 editBuilder = Gtk.Builder()
 uiPathEdit = Path(uiPath) / "game-edit.ui"
 manager = LibraryManager()
-library = LibraryManager().load("games.json")
 
 def openEditWindow(
         game,
@@ -24,7 +23,8 @@ def openEditWindow(
         gamesList,
         showGames,
         getFilteredGames,
-        currentSource
+        currentSource,
+        existingGames
     ):
     editBuilder.add_from_file(str(uiPathEdit))
     editWindow = editBuilder.get_object("gameEdit")
@@ -38,28 +38,28 @@ def openEditWindow(
     gameCover.set_filename(str(coverPath))
 
     coverButton = editBuilder.get_object("changeCover")
-    coverButton.connect("clicked", lambda button: changeCover(game, editWindow, gameCover, gameCards))
+    coverButton.connect("clicked", lambda button: changeCover(game, editWindow, gameCover, gameCards, existingGames))
 
     resetCoverButton = editBuilder.get_object("resetCover")
-    resetCoverButton.connect("clicked", lambda button: resetCover(game, gameCards, gameCover))
+    resetCoverButton.connect("clicked", lambda button: resetCover(game, gameCards, gameCover, existingGames))
 
     hideSwitch = editBuilder.get_object("hideSwitch")
-    hideSwitch.connect("state-set", lambda switch, state: onHideToggled(switch, state, game, gamesList, showGames, getFilteredGames, currentSource))
+    hideSwitch.connect("notify::active", lambda switch, pspec: onHideToggled(switch, switch.get_active(), game, gamesList, showGames, getFilteredGames, currentSource, existingGames))
     hideSwitch.set_active(game.hidden)
 
     searchSgdbButton = editBuilder.get_object("searchSgdb")
     searchSgdbButton.connect("clicked", lambda button: searchSgdb(game, editWindow))
 
     currentTitle = editBuilder.get_object("currentTitle")
-    currentTitle.set_label(game.title)
+    currentTitle.set_subtitle(game.title)
 
     currentCommand = editBuilder.get_object("currentCommand")
-    currentCommand.set_label(" ".join(game.command))
+    currentCommand.set_subtitle(" ".join(game.command))
 
     editWindow.set_transient_for(window)
     editWindow.present()
 
-def changeCover(game, window, gameCoverWidget, gameCards):
+def changeCover(game, window, gameCoverWidget, gameCards, existingGames):
     fileWindow = Gtk.FileDialog()
     fileWindow.set_title("Select Cover Image")
 
@@ -80,15 +80,11 @@ def changeCover(game, window, gameCoverWidget, gameCards):
         gameCoverWidget.set_filename(game.cover)
         refreshSingleCover(game, gameCards)
 
-        for entry in library:
-            if entry.id == game.id:
-                entry.cover = game.cover
-                break
-        manager.save("games.json", library)
+        manager.save("games.json", existingGames.values())
 
     fileWindow.open(window, None, onFileChosen)
 
-def resetCover(game, gameCards, gameCoverWidget):
+def resetCover(game, gameCards, gameCoverWidget, existingGames):
     download = downloadCover(game)
     if not download:
         game.cover = None
@@ -97,11 +93,7 @@ def resetCover(game, gameCards, gameCoverWidget):
         gameCoverWidget.set_filename(str(game.cover))
     refreshSingleCover(game, gameCards)
 
-    for entry in library:
-        if entry.id == game.id:
-            entry.cover = game.cover
-            break
-    manager.save("games.json", library)    
+    manager.save("games.json", existingGames.values())
 
     
 def onHideToggled(
@@ -111,18 +103,15 @@ def onHideToggled(
         gamesList,
         showGames,
         getFilteredGames,
-        currentSource
+        currentSource,
+        existingGames
     ):
     if state:
         game.hidden = True
     else:
         game.hidden = False
     
-    for entry in library:
-        if entry.id == game.id:
-            entry.hidden = game.hidden
-            break
-    manager.save("games.json", library)
+    manager.save("games.json", existingGames.values())
     filtered = getFilteredGames(currentSource, gamesList)
     gamesList.remove_all()
     showGames(filtered)
