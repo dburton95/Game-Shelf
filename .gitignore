@@ -172,3 +172,5 @@ helloworld.py
 
 *.compiled
 /data/covers/*
+
+*.code-workspace

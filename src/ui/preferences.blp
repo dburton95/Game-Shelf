@@ -22,6 +22,17 @@ Adw.Window preferences {
       Adw.PreferencesGroup importerList {
         title: _("Importers");
       }
+      Adw.PreferencesGroup cleanupOptions {
+        title: _("Cleanup");
+      }
+      Adw.PreferencesGroup bigRedButton {
+        title: _("Big Red Button");
+        styles ["destructive-action"]
+        Adw.ButtonRow {
+          styles ["destructive-action"]
+          title: _("Reset Games List");
+        }
+      }
     };
   };
 }

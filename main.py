@@ -18,8 +18,7 @@ builder = Gtk.Builder()
 mainUiPath = Path(uiPath) / "main.ui"
 manager = LibraryManager()
 currentSource = "all"
-existingGames = manager.load("games.json")
-existingById = manager.list_by_id(existingGames)
+existingById = manager.list_by_id(manager.load("games.json"))
 scanExecutor = ThreadPoolExecutor(max_workers=1)
 settings = Gio.Settings.new("io.github.dburton95.Game-Shelf")
 
@@ -49,7 +48,7 @@ def buildSourceList():
 
 
 def on_activate(app):
-    global gamesList, existingById, existingGames, window
+    global gamesList, existingById, window
 
     stylePath = Path(__file__).parent / "src/ui/style.css"
     cssProvider = Gtk.CssProvider()
@@ -61,7 +60,7 @@ def on_activate(app):
         Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
     )
 
-    existingGames = manager.load("games.json")
+    existingById = manager.list_by_id(manager.load("games.json"))
     builder.add_from_file(str(mainUiPath))
     window = builder.get_object("main")
     window.set_application(app)
@@ -73,7 +72,7 @@ def on_activate(app):
     settings.connect("changed::max-games-per-row", on_max_games_per_row_changed)
     gamesList.connect("child-activated", on_game_clicked)
 
-    filtered = getFilteredGames(currentSource, existingGames)
+    filtered = getFilteredGames(currentSource, existingById.values())
     showGames(filtered)
       
     buildSourceList()
@@ -84,19 +83,19 @@ def on_activate(app):
     rescan_action = Gio.SimpleAction.new("rescan", None)
     rescan_action.connect(
         "activate",
-        lambda action, param: scanExecutor.submit(buildGamesList, existingGames, refreshGamesList, lambda game: refreshSingleCover(game, gameCards))
+        lambda action, param: scanExecutor.submit(buildGamesList, list(existingById.values()), refreshGamesList, lambda game: refreshSingleCover(game, gameCards))
     )
     app.add_action(rescan_action)
 
     prefs_action = Gio.SimpleAction.new("preferences", None)
     prefs_action.connect(
         "activate",
-        lambda action, param: openPrefWindow(window)
+        lambda action, param: openPrefWindow(window, existingById, refreshGamesList)
     )
     app.add_action(prefs_action)
 
     window.present()
-    scanExecutor.submit(buildGamesList, existingGames, refreshGamesList, lambda game: refreshSingleCover(game, gameCards))
+    scanExecutor.submit(buildGamesList, list(existingById.values()), refreshGamesList, lambda game: refreshSingleCover(game, gameCards))
 
 
     
